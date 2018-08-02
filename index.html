@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="howler.core.js"></script>
+</head>
+
+<body>
+
+    <h1>Progressão ||: C | G | Am | F :||</h1>
+
+    <script>
+        //carregando os arquivos de áudio
+        let sounds = [];
+        let howls = [];
+
+        for (var z = 48; z <= 95; z++) {
+            sounds.push('sounds/piano' + z.toString() + '.mp3');
+            var howl = new Howl({
+                src: ['sounds/piano' + z.toString() + '.mp3'],
+                volume: 0.2
+            });
+            howls.push(howl);
+        }     
+
+        //sequência de acorde a ser tocado (MIDI number notes)
+        progressao =[ 
+        [60, 72, 76, 79], //C
+        [55, 67, 71, 74], //G
+        [57, 69, 72, 76], //Am
+        [53, 65, 69, 72] //F
+        ];
+        
+        contador = 0;
+        setInterval(arpejo, 0, progressao);
+  
+
+        //define o arpejo do acorde
+        function arpejo(acordes){
+          
+        
+
+        acordes.forEach(function(acorde) {
+            tocar(acorde[0], contador = contador + 250);
+            tocar(acorde[1], contador = contador + 250);
+            tocar(acorde[2], contador = contador + 250);
+            tocar(acorde[3], contador = contador + 250);
+        }, this);
+ 
+        }
+
+        //atrasa a execução da nota
+        function tocar(nota, tempoEmMillis){
+            if(tempoEmMillis == 0){
+                howls[nota-48].play();
+            }else{
+                setTimeout(function() {howls[nota-48].play(); }, tempoEmMillis);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
