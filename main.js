@@ -1,3 +1,6 @@
+let reprodutor;
+let timers = [];
+
 //carregando os arquivos de áudio
 let sounds = [];
 let howls = [];
@@ -12,39 +15,140 @@ for (var z = 48; z <= 95; z++) {
 }
 
 //define o arpejo do acorde
-function arpejador(acordes) {
-  acordes.forEach(function(acorde) {
-    if (acorde.segunda) {
-      tocar(acorde.baixo, (contador = contador + 250));
-      tocar(acorde.fundamental, (contador = contador + 250));
-      tocar(acorde.segunda, (contador = contador + 250));
-      tocar(acorde.quinta, (contador = contador + 250));
-    }
+function arpejador(arpejo, acordes) {
+  switch (arpejo) {
+    case 1:
+      acordes.forEach(function(acorde) {
+        if (acorde.segunda) {
+          tocar(acorde.baixo, (contador = contador + 250));
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.segunda, (contador = contador + 250));
+          tocar(acorde.quinta, (contador = contador + 250));
+        }
 
-    if (acorde.terca) {
-      tocar(acorde.baixo, (contador = contador + 250));
-      tocar(acorde.fundamental, (contador = contador + 250));
-      tocar(acorde.terca, (contador = contador + 250));
-      tocar(acorde.quinta, (contador = contador + 250));
-    }
+        if (acorde.terca) {
+          tocar(acorde.baixo, (contador = contador + 250));
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.terca, (contador = contador + 250));
+          tocar(acorde.quinta, (contador = contador + 250));
+        }
 
-    if (acorde.quarta) {
-      tocar(acorde.baixo, (contador = contador + 250));
-      tocar(acorde.fundamental, (contador = contador + 250));
-      tocar(acorde.quarta, (contador = contador + 250));
-      tocar(acorde.quinta, (contador = contador + 250));
-    }
-  }, this);
+        if (acorde.quarta) {
+          tocar(acorde.baixo, (contador = contador + 250));
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.quarta, (contador = contador + 250));
+          tocar(acorde.quinta, (contador = contador + 250));
+        }
+      }, this);
+      break;
+    case 2:
+      acordes.forEach(function(acorde) {
+        if (acorde.segunda) {
+          tocar(acorde.baixo, (contador = contador + 250));
+
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.segunda, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 250));
+
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.segunda, contador);
+          tocar(acorde.quinta, contador);
+        }
+
+        if (acorde.terca) {
+          tocar(acorde.baixo, (contador = contador + 250));
+
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.terca, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 250));
+
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.terca, contador);
+          tocar(acorde.quinta, contador);
+        }
+
+        if (acorde.quarta) {
+          tocar(acorde.baixo, (contador = contador + 250));
+
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.quarta, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 250));
+
+          tocar(acorde.fundamental, (contador = contador + 250));
+          tocar(acorde.quarta, contador);
+          tocar(acorde.quinta, contador);
+        }
+      }, this);
+      break;
+    case 3:
+      acordes.forEach(function(acorde) {
+        if (acorde.segunda) {
+          tocar(acorde.baixo, (contador = contador + 500));
+          tocar(acorde.fundamental, contador);
+          tocar(acorde.segunda, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 500));
+
+          tocar(acorde.baixo, (contador = contador + 500));
+          tocar(acorde.fundamental, contador);
+          tocar(acorde.segunda, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 500));
+        }
+
+        if (acorde.terca) {
+          tocar(acorde.baixo, (contador = contador + 500));
+          tocar(acorde.fundamental, contador);
+          tocar(acorde.terca, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 500));
+
+          tocar(acorde.baixo, (contador = contador + 500));
+          tocar(acorde.fundamental, contador);
+          tocar(acorde.terca, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 500));
+        }
+
+        if (acorde.quarta) {
+          tocar(acorde.baixo, (contador = contador + 500));
+          tocar(acorde.fundamental, contador);
+          tocar(acorde.quarta, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 500));
+
+          tocar(acorde.baixo, (contador = contador + 500));
+          tocar(acorde.fundamental, contador);
+          tocar(acorde.quarta, contador);
+          tocar(acorde.quinta, contador);
+
+          tocar(acorde.baixo, (contador = contador + 500));
+        }
+      }, this);
+      break;
+  }
 }
 
 //toca a nota no tempo determinado
 function tocar(nota, tempoEmMillis) {
+  
   if (tempoEmMillis == 0) {
     howls[nota - 48].play();
   } else {
-    setTimeout(function() {
+    timers.push(setTimeout(function() {
       howls[nota - 48].play();
-    }, tempoEmMillis);
+    }, tempoEmMillis));
   }
 }
 
@@ -66,6 +170,7 @@ var Acorde = function() {
 //inverte o baixo do acorde
 function inverteBaixo(acorde, cifra) {
   acorde.baixo = converteNotaEmMidi(cifra, 3);
+  texto[texto.length - 1] = texto[texto.length - 1] + "/" + cifra;
 }
 
 /*
@@ -84,31 +189,37 @@ function defineTriade(acorde, cifra, categoria) {
   if (categoria === "maior") {
     acorde.terca = fundamental + intervalo("3M");
     acorde.quinta = fundamental + intervalo("5J");
+    texto.push(cifra);
   }
 
   if (categoria === "menor") {
     acorde.terca = fundamental + intervalo("3m");
     acorde.quinta = fundamental + intervalo("5J");
+    texto.push(cifra + "m");
   }
 
   if (categoria === "aumentada") {
     acorde.terca = fundamental + intervalo("3M");
     acorde.quinta = fundamental + intervalo("5A");
+    texto.push(cifra + "+");
   }
 
   if (categoria === "diminuta") {
     acorde.terca = fundamental + intervalo("3m");
     acorde.quinta = fundamental + intervalo("5d");
+    texto.push(cifra + "dim");
   }
 
   if (categoria === "sus2") {
     acorde.segunda = fundamental + intervalo("2M");
     acorde.quinta = fundamental + intervalo("5J");
+    texto.push(cifra + "sus2");
   }
 
   if (categoria === "sus4") {
     acorde.quarta = fundamental + intervalo("4J");
     acorde.quinta = fundamental + intervalo("5J");
+    texto.push(cifra + "sus4");
   }
 }
 
@@ -206,26 +317,49 @@ execução principal
 =======================================
 */
 
-progressao = [];
+function executa() {
+  progressao = [];
+  texto = [];
 
-//definindo os acorde da progressão
-acorde = new Acorde();
-defineTriade(acorde, "C", "maior");
-progressao.push(acorde);
+  //definindo os acorde da progressão
+  acorde = new Acorde();
+  defineTriade(acorde, "C", "maior");
+  progressao.push(acorde);
 
-acorde = new Acorde();
-defineTriade(acorde, "C", "sus4");
-progressao.push(acorde);
+  acorde = new Acorde();
+  defineTriade(acorde, "A", "menor");
+  progressao.push(acorde);
 
-acorde = new Acorde();
-defineTriade(acorde, "C", "maior");
-inverteBaixo(acorde, "E")
-progressao.push(acorde);
+  acorde = new Acorde();
+  defineTriade(acorde, "G", "maior");
+  inverteBaixo(acorde, "B");
+  progressao.push(acorde);
 
-acorde = new Acorde();
-defineTriade(acorde, "C", "sus2");
-progressao.push(acorde);
+  acorde = new Acorde();
+  defineTriade(acorde, "F", "maior");
+  progressao.push(acorde);
+
+  document.getElementById("progressao").innerHTML =
+    "Progressão ||: " + texto.join(" | ") + " :||";
+}
 
 
-contador = 0;
-setInterval(arpejador, 0, progressao);
+//reprodução
+function reproduzir() {
+  botao = document.getElementById("play-pause");
+  if (botao.getAttribute("value") ==="play") {
+    contador = 0;
+    botao.setAttribute("value", "pause");
+    reprodutor = setInterval(arpejador, 0, 3, progressao);
+    return true;
+  }
+
+  if (botao.getAttribute("value") === "pause") {
+    botao.setAttribute("value", "play");
+    clearInterval(reprodutor);
+    timers.forEach(function(timer){
+      clearTimeout(timer);
+    })
+    return true;
+  }
+}
