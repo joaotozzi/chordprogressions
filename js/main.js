@@ -1,3 +1,4 @@
+//timers
 let reprodutor;
 let timers = [];
 
@@ -26,7 +27,7 @@ function executa() {
 
   //definindo os acorde da progressão
   acorde = new Acorde();
-  triade(acorde, "C", "maior");
+  triade(acorde, "C#", "menor");
   progressao.push(acorde);
 
   acorde = new Acorde();
@@ -34,12 +35,11 @@ function executa() {
   progressao.push(acorde);
 
   acorde = new Acorde();
-  triade(acorde, "D", "maior");
-  inversao(acorde, "F#");
+  triade(acorde, "E", "maior");
   progressao.push(acorde);
 
   acorde = new Acorde();
-  triade(acorde, "E", "menor");
+  triade(acorde, "E", "sus2");
   progressao.push(acorde);
 
   document.getElementById("progressao").innerHTML =
@@ -48,24 +48,27 @@ function executa() {
 
 //reprodução
 function reproduzir() {
-  botao = document.getElementById("play-pause");
-  if (botao.getAttribute("value") === "PLAY") {
+  if (document.getElementById("play-pause").getAttribute("value") === "PLAY") {
     contador = 0;
-    botao.setAttribute("value", "PAUSE");
+    document.getElementById("play-pause").setAttribute("value", "PAUSE");
     arpejo = document.getElementById("arpejo");
-    
-    if(document.getElementById("repetir").checked){
-      reprodutor = setInterval(arpejador, 0, arpejo.options[arpejo.selectedIndex].value, progressao);
-    }else{
+
+    if (document.getElementById("repetir").checked) {
+      reprodutor = setInterval(
+        arpejador,
+        0,
+        arpejo.options[arpejo.selectedIndex].value,
+        progressao
+      );
+    } else {
       arpejador(arpejo.options[arpejo.selectedIndex].value, progressao);
     }
-    
 
     return true;
   }
 
-  if (botao.getAttribute("value") === "PAUSE") {
-    botao.setAttribute("value", "PLAY");
+  if (document.getElementById("play-pause").getAttribute("value") === "PAUSE") {
+    document.getElementById("play-pause").setAttribute("value", "PLAY");
     clearInterval(reprodutor);
     timers.forEach(function(timer) {
       clearTimeout(timer);
@@ -75,9 +78,15 @@ function reproduzir() {
 }
 
 function pausar() {
-  botao.setAttribute("value", "PLAY");
+  document.getElementById("play-pause").setAttribute("value", "PLAY");
   clearInterval(reprodutor);
   timers.forEach(function(timer) {
     clearTimeout(timer);
   });
+}
+
+function atualizaValorBPM(bpm) {
+  document.getElementById("label-bpm").innerHTML = "BPM: " + bpm;
+  pausar();
+  andamento = bpm;
 }

@@ -1,130 +1,142 @@
+andamento = 100;
+
+var Subdivisoes = function() {
+  this.seminima = "";
+  this.colcheia = "";
+  this.semicolcheia = "";
+  this.tercina = "";
+};
+
+function defineTempo(bpm) {
+  subdivisoes = new Subdivisoes();
+  subdivisoes.seminima = 60000 / bpm;
+  subdivisoes.colcheia = subdivisoes.seminima / 2;
+  subdivisoes.semicolcheia = subdivisoes.seminima / 4;
+  subdivisoes.tercina = subdivisoes.seminima / 3;
+
+  return subdivisoes;
+}
+
 //define o arpejo do acorde
 function arpejador(arpejo, acordes) {
+  tempo = defineTempo(andamento);
+
   switch (arpejo) {
     case "1":
       acordes.forEach(function(acorde) {
-        if (acorde.segunda) {
-          tocar(acorde.baixo, (contador = contador + 250));
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.segunda, (contador = contador + 250));
-          tocar(acorde.quinta, (contador = contador + 250));
-        }
+        for (i = 0; i < 4; i++) {
+          if (acorde.segunda) {
+            tocar(acorde.baixo, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.fundamental, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.segunda, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.quinta, (contador = contador + tempo.semicolcheia));
+          }
 
-        if (acorde.terca) {
-          tocar(acorde.baixo, (contador = contador + 250));
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.terca, (contador = contador + 250));
-          tocar(acorde.quinta, (contador = contador + 250));
-        }
+          if (acorde.terca) {
+            tocar(acorde.baixo, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.fundamental, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.terca, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.quinta, (contador = contador + tempo.semicolcheia));
+          }
 
-        if (acorde.quarta) {
-          tocar(acorde.baixo, (contador = contador + 250));
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.quarta, (contador = contador + 250));
-          tocar(acorde.quinta, (contador = contador + 250));
+          if (acorde.quarta) {
+            tocar(acorde.baixo, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.fundamental, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.quarta, (contador = contador + tempo.semicolcheia));
+            tocar(acorde.quinta, (contador = contador + tempo.semicolcheia));
+          }
         }
       }, this);
       break;
+    
     case "2":
       acordes.forEach(function(acorde) {
-        if (acorde.segunda) {
-          tocar(acorde.baixo, (contador = contador + 250));
+          if (acorde.segunda) {
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));    
+            tocar(acorde.baixo, contador);
+            tocar(acorde.segunda, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.segunda, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 250));
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.segunda, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.segunda, contador);
-          tocar(acorde.quinta, contador);
-        }
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-        if (acorde.terca) {
-          tocar(acorde.baixo, (contador = contador + 250));
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));    
+            tocar(acorde.segunda, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.terca, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 250));
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.segunda, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.terca, contador);
-          tocar(acorde.quinta, contador);
-        }
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
+          }
 
-        if (acorde.quarta) {
-          tocar(acorde.baixo, (contador = contador + 250));
+          if (acorde.terca) {
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.baixo, contador);
+            tocar(acorde.terca, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.quarta, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 250));
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.terca, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.fundamental, (contador = contador + 250));
-          tocar(acorde.quarta, contador);
-          tocar(acorde.quinta, contador);
-        }
-      }, this);
-      break;
-    case "3":
-      acordes.forEach(function(acorde) {
-        if (acorde.segunda) {
-          tocar(acorde.baixo, (contador = contador + 500));
-          tocar(acorde.fundamental, contador);
-          tocar(acorde.segunda, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 500));
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.terca, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.baixo, (contador = contador + 500));
-          tocar(acorde.fundamental, contador);
-          tocar(acorde.segunda, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 500));
-        }
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.terca, contador);
+            tocar(acorde.quinta, contador);
 
-        if (acorde.terca) {
-          tocar(acorde.baixo, (contador = contador + 500));
-          tocar(acorde.fundamental, contador);
-          tocar(acorde.terca, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
+          }
 
-          tocar(acorde.baixo, (contador = contador + 500));
+          if (acorde.quarta) {
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.baixo, contador);
+            tocar(acorde.quarta, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.baixo, (contador = contador + 500));
-          tocar(acorde.fundamental, contador);
-          tocar(acorde.terca, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 500));
-        }
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.quarta, contador);
+            tocar(acorde.quinta, contador);
 
-        if (acorde.quarta) {
-          tocar(acorde.baixo, (contador = contador + 500));
-          tocar(acorde.fundamental, contador);
-          tocar(acorde.quarta, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 500));
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.quarta, contador);
+            tocar(acorde.quinta, contador);
 
-          tocar(acorde.baixo, (contador = contador + 500));
-          tocar(acorde.fundamental, contador);
-          tocar(acorde.quarta, contador);
-          tocar(acorde.quinta, contador);
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
 
-          tocar(acorde.baixo, (contador = contador + 500));
-        }
+            tocar(acorde.fundamental, (contador = contador + tempo.colcheia));
+            tocar(acorde.quarta, contador);
+            tocar(acorde.quinta, contador);
+
+            tocar(acorde.baixo, (contador = contador + tempo.colcheia));
+          }
       }, this);
       break;
   }
 
-  if(!document.getElementById("repetir").checked){
-      fimExecucao(contador);
+  if (!document.getElementById("repetir").checked) {
+    fimExecucao(contador);
   }
 }
 
@@ -142,6 +154,8 @@ function tocar(nota, tempoEmMillis) {
 }
 
 //muda o texto do botão (quando progressão termina e não está me loop)
-function fimExecucao(tempo){
-    setTimeout(function(){ document.getElementById("play-pause").setAttribute("value", "PLAY");}, tempo);
+function fimExecucao(fim) {
+  setTimeout(function() {
+    document.getElementById("play-pause").setAttribute("value", "PLAY");
+  }, fim);
 }

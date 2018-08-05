@@ -24,8 +24,11 @@
         <select id="arpejo" onchange="pausar()">
             <option value="1">Arpejo #1</option>
             <option value="2">Arpejo #2</option>
-            <option value="3">Arpejo #3</option>
         </select>
+    </div>
+    <div id="controle-andamento">
+        <label for="bpm" id="label-bpm">BPM: 100</label>
+        <input type="range" value="100" id="bpm" min="60" max="150" step="5" onchange="atualizaValorBPM(this.value)">
     </div>
 </body>
 
