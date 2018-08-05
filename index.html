@@ -2,14 +2,31 @@
 <html>
 
 <head>
-    <script src="howler.core.js"></script>
-    <script src=main.js></script>
+    <script src="js/howler.core.js"></script>
+    <script src=js/teoria.js></script>
+    <script src="js/ritmo.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
 
 <body onload="executa()">
     <h1 id="progressao"></h1>
 
-    <input type="button" value="play" onclick="reproduzir()" id="play-pause">
+    <div id="controles">
+        <div id="controle-repeticao">
+            <input type="checkbox" id="repetir" onchange="pausar()">
+            <label for="repetir">(repetir)</label>
+        </div>
+
+
+        <input type="button" value="PLAY" onclick="reproduzir()" id="play-pause">
+
+        <select id="arpejo" onchange="pausar()">
+            <option value="1">Arpejo #1</option>
+            <option value="2">Arpejo #2</option>
+            <option value="3">Arpejo #3</option>
+        </select>
+    </div>
 </body>
 
 </html>
