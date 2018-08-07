@@ -3,32 +3,36 @@
 
 <head>
     <script src="js/howler.core.js"></script>
-    <script src=js/teoria.js></script>
-    <script src="js/ritmo.js"></script>
+    <script src=js/harmonia.js></script>
+    <script src="js/reprodutor.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 
-<body onload="executa()">
+<body onload="iniciar()">
+    
     <h1 id="progressao"></h1>
 
     <div id="controles">
         <div id="controle-repeticao">
-            <input type="checkbox" id="repetir" onchange="pausar()">
+            <input type="checkbox" id="repetir" onchange="atualizaRepeticao()">
             <label for="repetir">(repetir)</label>
         </div>
 
 
-        <input type="button" value="PLAY" onclick="reproduzir()" id="play-pause">
+        <input type="button" value="PLAY" onclick="onBotaoPlayClicked()" id="play-pause">
 
-        <select id="arpejo" onchange="pausar()">
-            <option value="1">Arpejo #1</option>
-            <option value="2">Arpejo #2</option>
+        <select id="arpejo" onchange="atualizaArpejo()">
+            <option value="Simples">Simples</option>
+            <option value="ABCD">ABCD</option>
+            <option value="AB">AB</option>
+            <option value="ABBB">ABBB</option>
         </select>
     </div>
+
     <div id="controle-andamento">
-        <label for="bpm" id="label-bpm">BPM: 100</label>
-        <input type="range" value="100" id="bpm" min="60" max="150" step="5" onchange="atualizaValorBPM(this.value)">
+        <label for="bpm" id="label-bpm"></label>
+        <input type="range" id="bpm" min="60" max="240" step="5" onchange="atualizaBPM(this.value)">
     </div>
 </body>
 

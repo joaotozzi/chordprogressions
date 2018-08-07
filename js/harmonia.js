@@ -1,3 +1,5 @@
+let progressao = [];
+
 //Estrutura para armazenar as notas (em MIDI) de um Acorde
 Acorde = function() {
   this.baixo = "";
@@ -17,68 +19,79 @@ function reconheceAcorde (cifra){
 
 }
 
-/*
-adiciona ao acorde as notas da tríade (T + 3 + 5) de acordo com sua tipologia
-Também trata acordes suspensos sus2 (T + 2 + 5) e sus4 (T + 4 + 5)
-*/
-function triade(acorde, cifra, categoria) {
-  fundamental = converteNotaEmMidi(cifra, 4);
 
-  if (acorde.baixo === "") {
-    acorde.baixo = fundamental - intervalo("8");
-  }
+//Para acordes Tríades e Suspensos
+function triade(cifra, categoria, baixo) {
+  acorde = new Acorde();
+  texto = null;
+  
+  acorde.fundamental = converteNotaEmMidi(cifra, 4);
 
-  acorde.fundamental = fundamental;
-
+  //Tríade Maior
   if (categoria === "maior") {
-    acorde.terca = fundamental + intervalo("3M");
-    acorde.quinta = fundamental + intervalo("5J");
-    texto.push(cifra);
+    acorde.terca = acorde.fundamental + intervalo("3M");
+    acorde.quinta = acorde.fundamental + intervalo("5J");
+    progressao.push(acorde);
+    texto = cifra;
   }
 
+  //Tríade Menor
   if (categoria === "menor") {
-    acorde.terca = fundamental + intervalo("3m");
-    acorde.quinta = fundamental + intervalo("5J");
-    texto.push(cifra + "m");
+    acorde.terca = acorde.fundamental + intervalo("3m");
+    acorde.quinta = acorde.fundamental + intervalo("5J");
+    progressao.push(acorde);
+    texto = cifra + "m";
   }
 
+  //Tríade Aumentada
   if (categoria === "aumentada") {
-    acorde.terca = fundamental + intervalo("3M");
-    acorde.quinta = fundamental + intervalo("5A");
-    texto.push(cifra + "+");
+    acorde.terca = acorde.fundamental + intervalo("3M");
+    acorde.quinta = acorde.fundamental + intervalo("5A");
+    progressao.push(acorde);
+    texto = cifra + "+";
   }
 
+  //Tríade Diminuta
   if (categoria === "diminuta") {
-    acorde.terca = fundamental + intervalo("3m");
-    acorde.quinta = fundamental + intervalo("5d");
-    texto.push(cifra + "dim");
+    acorde.terca = acorde.fundamental + intervalo("3m");
+    acorde.quinta = acorde.fundamental + intervalo("5d");
+    progressao.push(acorde);
+    texto = cifra + "°";
   }
 
+  //Acorde Sus2
   if (categoria === "sus2") {
-    acorde.segunda = fundamental + intervalo("2M");
-    acorde.quinta = fundamental + intervalo("5J");
-    texto.push(cifra + "sus2");
+    acorde.segunda = acorde.fundamental + intervalo("2M");
+    acorde.quinta = acorde.fundamental + intervalo("5J");
+    progressao.push(acorde);
+    texto = cifra + "sus2";
   }
 
+  //Acorde Sus4
   if (categoria === "sus4") {
-    acorde.quarta = fundamental + intervalo("4J");
-    acorde.quinta = fundamental + intervalo("5J");
-    texto.push(cifra + "sus4");
+    acorde.quarta = acorde.fundamental + intervalo("4J");
+    acorde.quinta = acorde.fundamental + intervalo("5J");
+    progressao.push(acorde);
+    texto = cifra + "sus4";
   }
+
+  //inversão de baixo
+  if(baixo === ""){
+    acorde.baixo = acorde.fundamental - intervalo("8");
+  }else{
+    progressao[progressao.length -1].baixo = converteNotaEmMidi(baixo, 3);
+    return texto + "/" + baixo;
+  }
+
+  return texto;
 }
 
 function tetrade(){
-
-}
-
-//inverte o baixo do acorde
-function inversao(acorde, baixo){
-  acorde.baixo = converteNotaEmMidi(baixo, 3);
-  texto[texto.length - 1] = texto[texto.length - 1] + "/" + baixo;
+  //falta implementar
 }
 
 function tensoes(){
-  
+  //falta implementar
 }
 
 //retorna os intervalos em numero de semitons
