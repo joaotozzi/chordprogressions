@@ -1,0 +1,66 @@
+Acorde{
+    Cifra = CifraEspecial | CifraComum
+    
+    CifraComum = Tipo Tensoes? Baixo?
+    
+    Tipo = Tetrade | Suspenso | Sexta | Triade
+    
+    Triade = Diminuta | Menor | Aumentada | Maior
+    
+
+    Tensoes = VariosParenteses | UnicoParentese | Barra
+    UnicoParentese = "(" Intervalo ("," Intervalo)* ")"
+    VariosParenteses = ("(" Intervalo ")")+
+    Barra = ("/" Intervalo)+
+    Intervalo = ("#" | "b" | "+" | "-")? ("9" | "11" | "13")
+
+    Baixo = "/" "A".."G" ("#" | "b")? 
+
+    Fundamental = "A".."G" ("#" | "b")?
+
+    Diminuta = Fundamental "m(b5)"
+    Menor = Fundamental ("m" | "-")
+    Aumentada = Fundamental ("(#5)" | "+" | "aug" | "aum" | "5+")
+    Maior = Fundamental
+
+	Suspenso = Sus2 | Sus4
+    Sus2 = Fundamental ("sus2" | "2")
+    Sus4 = Fundamental ("sus4" | "sus" | "4")
+    
+    Sexta = Maior6 | Menor6
+    Maior6 = Fundamental "6"
+    Menor6 = Fundamental "m6"
+	
+    CifraEspecial = Nona | Power | Treze
+    Nona = Nona7 | Nona7M
+    Nona7 = Fundamental "9"
+    Nona7M = Fundamental "maj9"
+    
+    Power = Fundamental "5"
+    
+    Treze = Fundamental "13"
+    
+    Tetrade = TetAumentada | TetMaior | TetDiminuta | TetMenor
+    
+    TetMaior = Maior7M | Dominante 
+    
+    Maior7M = Fundamental ("7M" | "maj7")
+    
+    Dominante = DomSus | Dom5Aum | Dom5Dim | Dom
+    Dom = Fundamental "7"
+    DomSus = Fundamental ("7sus4" | "7sus" | "7/4")
+    Dom5Aum = Fundamental "7(#5)"
+    Dom5Dim = Fundamental "7(b5)"
+    
+    TetMenor = Menor7M | Menor7
+    Menor7 = Fundamental ("m7" | "-7")
+    Menor7M = Fundamental ("m(7M)" | "m(maj7)")
+    
+    TetAumentada = Aum7M | Aum7
+    Aum7M = Fundamental ("7M(#5)" | "+7M") 
+    Aum7 = Fundamental ("aug7" | "+7")
+    
+    TetDiminuta = MeioDim | Dim
+    MeioDim = Fundamental "m7(b5)"
+    Dim = Fundamental ("°7"| "°"| "dim7"| "dim") 
+}
