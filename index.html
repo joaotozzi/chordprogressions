@@ -2,6 +2,9 @@
 <html>
 
 <head>
+    <script src="js/ohm.js"></script>
+    <script type="text/ohm-js" src="js/gramatica.ohm"></script>
+    <script src="js/parser.js"></script>
     <script src="js/howler.core.js"></script>
     <script src=js/harmonia.js></script>
     <script src="js/reprodutor.js"></script>
@@ -10,7 +13,11 @@
 </head>
 
 <body onload="iniciar()">
-    
+
+    <div id="area-acordes">
+        <input type="text" id="acordes" placeholder="Digite aqui os acordes">
+        <input type="button" id="botao-acordes" value="GERAR" onclick="definirAcordes()">
+    </div>
     <h1 id="progressao"></h1>
 
     <div id="controles">

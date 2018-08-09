@@ -1,7 +1,7 @@
 Acorde{
     Cifra = CifraEspecial | CifraComum
     
-    CifraComum = Tipo Tensoes? Baixo?
+    CifraComum = Tipo Tensoes? Inversao?
     
     Tipo = Tetrade | Suspenso | Sexta | Triade
     
@@ -12,9 +12,10 @@ Acorde{
     UnicoParentese = "(" Intervalo ("," Intervalo)* ")"
     VariosParenteses = ("(" Intervalo ")")+
     Barra = ("/" Intervalo)+
-    Intervalo = ("#" | "b" | "+" | "-")? ("9" | "11" | "13")
+    Intervalo = ("#" | "b")? ("9" | "11" | "13")
 
-    Baixo = "/" "A".."G" ("#" | "b")? 
+    Inversao = "/" Baixo
+    Baixo = "A".."G" ("#" | "b")? 
 
     Fundamental = "A".."G" ("#" | "b")?
 
@@ -23,22 +24,20 @@ Acorde{
     Aumentada = Fundamental ("(#5)" | "+" | "aug" | "aum" | "5+")
     Maior = Fundamental
 
-	Suspenso = Sus2 | Sus4
+    Suspenso = Sus2 | Sus4
     Sus2 = Fundamental ("sus2" | "2")
     Sus4 = Fundamental ("sus4" | "sus" | "4")
     
     Sexta = Maior6 | Menor6
     Maior6 = Fundamental "6"
     Menor6 = Fundamental "m6"
-	
-    CifraEspecial = Nona | Power | Treze
+    
+    CifraEspecial = Nona | Power
     Nona = Nona7 | Nona7M
     Nona7 = Fundamental "9"
     Nona7M = Fundamental "maj9"
     
     Power = Fundamental "5"
-    
-    Treze = Fundamental "13"
     
     Tetrade = TetAumentada | TetMaior | TetDiminuta | TetMenor
     

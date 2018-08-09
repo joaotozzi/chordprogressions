@@ -1,41 +1,51 @@
 let bpm = 120;
 let arpejo = "Simples";
 let repetir = false;
-let textoProgressao = [];
 
+//definindo os acorde da progressão
+function definirAcordes() {
+  acordesIntervalos = [];
+  
+  textoProgressao = document.getElementById("acordes").value;
 
+  //limpa o input
+  document.getElementById("acordes").value = "";
 
+  vetorDeAcordes = textoProgressao.split(" ");
+  let status = true;
+  let erros = [];
 
-/*
-=================================
-definindo os acorde da progressão
-=================================
-*/
-function definirAcordes(){
-  textoProgressao.push(triade("D", "menor", ""));
-  textoProgressao.push(triade("G", "maior", ""));
-  textoProgressao.push(triade("C", "maior",""));
+  vetorDeAcordes.forEach(function(c) {
+    temp = reconheceAcorde(c);
+
+    if (temp === "erro") {
+      status = false;
+      erros.push(c);
+    }else{
+      acordesIntervalos.push(temp);
+    } 
+  });
+
+  if (status) {
+    //Exibe a progressão
+    document.getElementById("progressao").innerHTML =
+      "Progressão ||: " + textoProgressao.split(" ").join(" | ") + " :||";
+  } else {
+    document.getElementById("progressao").innerHTML =
+      "O sistema não reconhece o(s) acorde(s) " + erros.join(" ");
+  }
 }
-
-
 
 //chamada durante o carregamento da página HTML
 function iniciar() {
-  definirAcordes();
-  configurarValoresIniciais();
-}
-
-function configurarValoresIniciais(){
-  document.getElementById("progressao").innerHTML = "Progressão ||: " + textoProgressao.join(" | ") + " :||";
-
   document.getElementById("label-bpm").innerHTML = "BPM: " + bpm;
   document.getElementById("bpm").setAttribute("value", bpm);
 }
 
-function onBotaoPlayClicked(){
-  if(botaoPlay === "PLAY"){
+function onBotaoPlayClicked() {
+  if (botaoPlay === "PLAY") {
     tocarProgressao(progressao, bpm, arpejo, repetir);
-  }else{
+  } else {
     pausar();
   }
 }
@@ -46,17 +56,17 @@ function atualizaBPM(andamento) {
   pausar();
 }
 
-function atualizaRepeticao(){
-  if(document.getElementById("repetir").checked){
+function atualizaRepeticao() {
+  if (document.getElementById("repetir").checked) {
     repetir = true;
-  }else{
-    repetir =false;
+  } else {
+    repetir = false;
   }
   pausar();
 }
 
-function atualizaArpejo(){
-  selecaoArpejo = document.getElementById("arpejo");  
+function atualizaArpejo() {
+  selecaoArpejo = document.getElementById("arpejo");
   arpejo = selecaoArpejo.options[selecaoArpejo.selectedIndex].value;
   pausar();
 }

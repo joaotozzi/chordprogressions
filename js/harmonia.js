@@ -1,4 +1,5 @@
 let progressao = [];
+let acordesIntervalos = [];
 
 //Estrutura para armazenar as notas (em MIDI) de um Acorde
 Acorde = function() {
@@ -10,14 +11,13 @@ Acorde = function() {
   this.quinta = "";
   this.sexta = "";
   this.setima = "";
+  this.oitava = "";
   this.nona = "";
   this.decimaPrimeira = "";
   this.decimaTerceira = "";
 }
 
-function reconheceAcorde (cifra){
 
-}
 
 
 //Para acordes Tríades e Suspensos
