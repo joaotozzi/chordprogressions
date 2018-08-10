@@ -73,3 +73,23 @@ label[for=repetir]{
 #bpm{
     margin-top: 10px;
 }
+
+#area-acordes{
+    margin: 50px auto 0 auto;
+    width: 420px;    
+}
+
+#acordes{
+    width: 300px;
+    height: 30px;
+}
+
+#botao-acordes{
+    background-color: rgb(15, 87, 92);
+    color: white;
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}

@@ -11,137 +11,109 @@ Acorde = function() {
   this.quinta = "";
   this.sexta = "";
   this.setima = "";
-  this.oitava = "";
+  this.oitava = ""; //apenas para power chords (X5)
   this.nona = "";
   this.decimaPrimeira = "";
   this.decimaTerceira = "";
+};
+
+function montarAcordes() {
+  acordesIntervalos.forEach(function(intervalosDoAcorde) {
+    acorde = new Acorde();
+
+    //extraindo a fundamental
+    fund = intervalosDoAcorde.split(" ").shift();
+    acorde.fundamental = converteNotaEmMidi(fund, 4);
+
+    //extraindo o baixo
+    baixo = intervalosDoAcorde.match(/[\/][A-G][\#|b]?/g);
+    if (baixo === null) {
+      acorde.baixo = acorde.fundamental - 12; //oitava abaixo
+    } else {
+      acorde.baixo = converteNotaEmMidi(baixo[0].substring(1), 3);
+    }
+
+    //extraindo os intervalos
+    vetIntervalos = intervalosDoAcorde.match(
+      /[2|3|4|5|6|7|8|9|11|13][M|m|A|d|J]/g
+    );
+    vetIntervalos.forEach(function(i) {
+      converteIntervaloEmMidi(acorde, i);
+    });
+
+    //adicionando o acorde ao vetor que armazena a progressão
+    progressao.push(acorde);
+  });
 }
 
-
-
-
-//Para acordes Tríades e Suspensos
-function triade(cifra, categoria, baixo) {
-  acorde = new Acorde();
-  texto = null;
-  
-  acorde.fundamental = converteNotaEmMidi(cifra, 4);
-
-  //Tríade Maior
-  if (categoria === "maior") {
-    acorde.terca = acorde.fundamental + intervalo("3M");
-    acorde.quinta = acorde.fundamental + intervalo("5J");
-    progressao.push(acorde);
-    texto = cifra;
-  }
-
-  //Tríade Menor
-  if (categoria === "menor") {
-    acorde.terca = acorde.fundamental + intervalo("3m");
-    acorde.quinta = acorde.fundamental + intervalo("5J");
-    progressao.push(acorde);
-    texto = cifra + "m";
-  }
-
-  //Tríade Aumentada
-  if (categoria === "aumentada") {
-    acorde.terca = acorde.fundamental + intervalo("3M");
-    acorde.quinta = acorde.fundamental + intervalo("5A");
-    progressao.push(acorde);
-    texto = cifra + "+";
-  }
-
-  //Tríade Diminuta
-  if (categoria === "diminuta") {
-    acorde.terca = acorde.fundamental + intervalo("3m");
-    acorde.quinta = acorde.fundamental + intervalo("5d");
-    progressao.push(acorde);
-    texto = cifra + "°";
-  }
-
-  //Acorde Sus2
-  if (categoria === "sus2") {
-    acorde.segunda = acorde.fundamental + intervalo("2M");
-    acorde.quinta = acorde.fundamental + intervalo("5J");
-    progressao.push(acorde);
-    texto = cifra + "sus2";
-  }
-
-  //Acorde Sus4
-  if (categoria === "sus4") {
-    acorde.quarta = acorde.fundamental + intervalo("4J");
-    acorde.quinta = acorde.fundamental + intervalo("5J");
-    progressao.push(acorde);
-    texto = cifra + "sus4";
-  }
-
-  //inversão de baixo
-  if(baixo === ""){
-    acorde.baixo = acorde.fundamental - intervalo("8");
-  }else{
-    progressao[progressao.length -1].baixo = converteNotaEmMidi(baixo, 3);
-    return texto + "/" + baixo;
-  }
-
-  return texto;
-}
-
-function tetrade(){
-  //falta implementar
-}
-
-function tensoes(){
-  //falta implementar
-}
-
-//retorna os intervalos em numero de semitons
-function intervalo(tipo) {
-  switch (tipo) {
+//Converte os intervalos em notas Midi com base na fundamental (que já está no objeto acorde)
+function converteIntervaloEmMidi(acorde, classInt) {
+  switch (classInt) {
     case "2M":
-      return 2;
+      acorde.segunda = acorde.fundamental + 2;
+      break;
     case "3m":
-      return 3;
+      acorde.terca = acorde.fundamental + 3;
+      break;
     case "3M":
-      return 4;
+      acorde.terca = acorde.fundamental + 4;
+      break;
     case "4J":
-      return 5;
+      acorde.quarta = acorde.fundamental + 5;
+      break;
     case "5d":
-      return 6;
+      acorde.quinta = acorde.fundamental + 6;
+      break;
     case "5J":
-      return 7;
+      acorde.quinta = acorde.fundamental + 7;
+      break;
     case "5A":
-      return 8;
+      acorde.quinta = acorde.fundamental + 8;
+      break;
     case "6M":
-      return 9;
+      acorde.sexta = acorde.fundamental + 9;
+      break;
     case "7d":
-      return 9;
+      acorde.setima = acorde.fundamental + 9;
+      break;
     case "7m":
-      return 10;
+      acorde.setima = acorde.fundamental + 10;
+      break;
     case "7M":
-      return 11;
+      acorde.setima = acorde.fundamental + 11;
+      break;
     case "8":
-      return 12;
+      acorde.oitava = acorde.fundamental + 12;
+      break;
     case "9m":
-      return 13;
+      acorde.nona = acorde.fundamental + 13;
+      break;
     case "9M":
-      return 14;
+      acorde.nona = acorde.fundamental + 14;
+      break;
     case "9A":
-      return 15;
+      acorde.nona = acorde.fundamental + 15;
+      break;
     case "11d":
-      return 16;
+      acorde.decimaPrimeira = acorde.fundamental + 16;
+      break;
     case "11J":
-      return 17;
+      acorde.decimaPrimeira = acorde.fundamental + 17;
+      break;
     case "11A":
-      return 18;
+      acorde.decimaPrimeira = acorde.fundamental + 18;
+      break;
     case "13m":
-      return 20;
+      acorde.decimaTerceira = acorde.fundamental + 20;
+      break;
     case "13M":
-      return 21;
+      acorde.decimaTerceira = acorde.fundamental + 21;
+      break;
     case "13A":
-      return 22;
+      acorde.decimaTerceira = acorde.fundamental + 22;
+      break;
   }
 }
-
 
 //converte cifra + oitava em Notação MIDI
 function converteNotaEmMidi(cifra, oitava) {

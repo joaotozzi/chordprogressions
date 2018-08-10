@@ -15,31 +15,33 @@
 <body onload="iniciar()">
 
     <div id="area-acordes">
-        <input type="text" id="acordes" placeholder="Digite aqui os acordes">
+        <input type="text" id="acordes" placeholder="Digite aqui os acordes, ex: Em7 C D Em7">
         <input type="button" id="botao-acordes" value="GERAR" onclick="definirAcordes()">
     </div>
     <h1 id="progressao"></h1>
 
-    <div id="controles">
-        <div id="controle-repeticao">
-            <input type="checkbox" id="repetir" onchange="atualizaRepeticao()">
-            <label for="repetir">(repetir)</label>
+    <div id="painel-oculto">
+        <div id="controles">
+            <div id="controle-repeticao">
+                <input type="checkbox" id="repetir" onchange="atualizaRepeticao()">
+                <label for="repetir">(repetir)</label>
+            </div>
+
+
+            <input type="button" value="PLAY" onclick="onBotaoPlayClicked()" id="play-pause">
+
+            <select id="arpejo" onchange="atualizaArpejo()">
+                <option value="ABBB">ABBB</option>
+                <option value="AB">AB</option>
+                <option value="Simples">Simples</option>
+                <!-- <option value="ABCD">ABCD</option> -->
+            </select>
         </div>
 
-
-        <input type="button" value="PLAY" onclick="onBotaoPlayClicked()" id="play-pause">
-
-        <select id="arpejo" onchange="atualizaArpejo()">
-            <option value="Simples">Simples</option>
-            <option value="ABCD">ABCD</option>
-            <option value="AB">AB</option>
-            <option value="ABBB">ABBB</option>
-        </select>
-    </div>
-
-    <div id="controle-andamento">
-        <label for="bpm" id="label-bpm"></label>
-        <input type="range" id="bpm" min="60" max="240" step="5" onchange="atualizaBPM(this.value)">
+        <div id="controle-andamento">
+            <label for="bpm" id="label-bpm"></label>
+            <input type="range" id="bpm" min="60" max="240" step="5" onchange="atualizaBPM(this.value)">
+        </div>
     </div>
 </body>
 
