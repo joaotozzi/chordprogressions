@@ -4,40 +4,41 @@ let repetir = false;
 
 //definindo os acorde da progressão
 function definirAcordes() {
-  pausar();
-  acordesIntervalos = [];
-  progressao = [];
-
   textoProgressao = document.getElementById("acordes").value;
+  if (!(textoProgressao === "")) {
+    pausar();
+    acordesIntervalos = [];
+    progressao = [];
 
-  //limpa o input
-  document.getElementById("acordes").value = "";
+    //limpa o input
+    document.getElementById("acordes").value = "";
 
-  vetorDeAcordes = textoProgressao.split(" ");
-  let status = true;
-  let erros = [];
+    vetorDeAcordes = textoProgressao.split(" ");
+    let status = true;
+    let erros = [];
 
-  vetorDeAcordes.forEach(function(c) {
-    temp = reconheceAcorde(c);
+    vetorDeAcordes.forEach(function(c) {
+      temp = reconheceAcorde(c);
 
-    if (temp === "erro") {
-      status = false;
-      erros.push(c);
+      if (temp === "erro") {
+        status = false;
+        erros.push(c);
+      } else {
+        acordesIntervalos.push(temp);
+      }
+    });
+
+    if (status) {
+      //Exibe a progressão
+      document.getElementById("progressao").innerHTML =
+        "||: " + textoProgressao.split(" ").join(" | ") + " :||";
+      montarAcordes();
+      mudarEstado("painel-oculto", false);
     } else {
-      acordesIntervalos.push(temp);
+      document.getElementById("progressao").innerHTML =
+        "O sistema não reconhece o(s) acorde(s): " + erros.join(" ");
+      mudarEstado("painel-oculto", true);
     }
-  });
-
-  if (status) {
-    //Exibe a progressão
-    document.getElementById("progressao").innerHTML =
-      "Progressão ||: " + textoProgressao.split(" ").join(" | ") + " :||";
-    montarAcordes();
-    mudarEstado("painel-oculto", false);
-  } else {
-    document.getElementById("progressao").innerHTML =
-      "O sistema não reconhece o(s) acorde(s): " + erros.join(" ");
-    mudarEstado("painel-oculto", true);
   }
 }
 
