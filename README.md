@@ -43,7 +43,7 @@ Power Chord: <strong><em>C5</strong></em><br/>
 Baixo Invertido: <strong><em>C/E</strong></em><br/>
 <br/>
 **ADICIONANDO TENSÕES**<br/>
-Para adicionar tensões pode-se usar as seguintes formas:<br/>
+Para adicionar tensões pode-se usar as seguintes formas:<br/><br/>
 Barras: <strong><em>C7/b9 C7M/9/b13</strong></em><br/>
 Parênteses: <strong><em>C7(b9) C7M(9)(b13)</strong></em><br/>
 Um único parêntese: <strong><em>C7M(9,b13)</strong></em><br/> 
