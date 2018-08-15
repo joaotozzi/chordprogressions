@@ -23,20 +23,26 @@ function montarAcordes() {
 
     //extraindo a fundamental
     fund = intervalosDoAcorde.split(" ").shift();
-    acorde.fundamental = converteNotaEmMidi(fund, 4);
+    acorde.fundamental = converteNotaEmMidi(fund, 3);
+
+    //array só com os intervalos
+    vetIntervalos = intervalosDoAcorde.split(" ");
 
     //extraindo o baixo
     baixo = intervalosDoAcorde.match(/[\/][A-G][\#|b]?/g);
     if (baixo === null) {
       acorde.baixo = acorde.fundamental - 12; //oitava abaixo
+
+      //extrai a fundamental do acorde da array
+      vetIntervalos = vetIntervalos.slice(1);
+
     } else {
-      acorde.baixo = converteNotaEmMidi(baixo[0].substring(1), 3);
+      acorde.baixo = converteNotaEmMidi(baixo[0].substring(1), 2);
+
+      //extrai a fundamental e a inversão de baixo da array
+      vetIntervalos = vetIntervalos.slice(1, vetIntervalos.length-1);
     }
 
-    //extraindo os intervalos
-    vetIntervalos = intervalosDoAcorde.match(
-      /[2|3|4|5|6|7|8|9|11|13][M|m|A|d|J]/g
-    );
     vetIntervalos.forEach(function(i) {
       converteIntervaloEmMidi(acorde, i);
     });

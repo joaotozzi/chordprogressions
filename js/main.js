@@ -13,6 +13,12 @@ function definirAcordes() {
     //limpa o input
     document.getElementById("acordes").value = "";
 
+    //removendo espaços duplicados da string de entrada
+    textoProgressao = textoProgressao.replace(/\s{2,}/g, " ");
+
+    //removendo espaços desnecessários na string de entrada 
+    textoProgressao = textoProgressao.trim();
+
     vetorDeAcordes = textoProgressao.split(" ");
     let status = true;
     let erros = [];
