@@ -60,6 +60,6 @@ Acorde{
     Aum7 = Fundamental ("aug7" | "+7")
     
     TetDiminuta = MeioDim | Dim
-    MeioDim = Fundamental ("m7(b5)" | "-7b5" | "m7(5-)")
-    Dim = Fundamental ("°7" | "º7" | "°" | "º" | "dim7"| "dim") 
+    MeioDim = Fundamental ("m7(b5)" | "m7(5-)")
+    Dim = Fundamental ("°" | "º" | "dim") 
 }

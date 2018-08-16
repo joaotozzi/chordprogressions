@@ -167,7 +167,7 @@ semantica.addOperation("retornaIntervalos", {
 
   //tétrades diminutas
   MeioDim: function(a, _) {
-    return a.retornaIntervalos() + " 3m 5d 7M";
+    return a.retornaIntervalos() + " 3m 5d 7m";
   },
   Dim: function(a, _) {
     return a.retornaIntervalos() + " 3m 5d 7d";
