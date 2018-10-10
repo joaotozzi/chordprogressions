@@ -10,9 +10,6 @@ function definirAcordes() {
     acordesIntervalos = [];
     progressao = [];
 
-    //limpa o input
-    document.getElementById("acordes").value = "";
-
     //removendo espaços duplicados da string de entrada
     textoProgressao = textoProgressao.replace(/\s{2,}/g, " ");
 
