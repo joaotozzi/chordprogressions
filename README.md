@@ -1,4 +1,4 @@
-# CHORD PROGRESSIONS (Versão 1.0)
+# CHORD PROGRESSIONS
 Uma ferramenta web desenvolvida em Javascript para a execução de progressões de acordes. Para testá-la, acesse esse [link](https://joaotozzi.github.io/chordprogressions/). 
 
 Para a construção dessa ferramenta foram utilizadas as seguintes bibliotecas:<br/>

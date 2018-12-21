@@ -1,35 +1,152 @@
+/*Para tirar o bug do vh no Chrome*/
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: rgb(240, 240, 240);
-  width: 100%;
-  height: 100%;
+  font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif;
   margin: 0;
 }
 
+/*cabeçalho*/
 header {
-  height: 50px;
-  background-color: rgb(17, 8, 70);
-  margin: 0;
-  width: 100%;
-  padding: 10px;
-}
-
-h1 {
-  float: left;
   color: white;
+  background-color: #272727;
+  box-shadow: 2px 0px 5px grey;
+  width: 100%;
+  position: fixed;
+}
+
+header h1 {
+  display: inline-block;
+  font-size: 26px;
   margin: 10px;
+  margin-left: 20px;
 }
 
-p {
-  color: rgb(51, 47, 47);
-  font-size: 60px;
-  font-weight: bold;
+nav {
+  margin: 0;
+  display: inline;
+  float: right;
+}
+
+nav ul {
+  list-style: none;
+  text-align: right;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 60px;
+  color:#e1e3e6;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+header a{
+  color: white;
+  margin-top: 0;
+  text-decoration: none;
+  border-bottom: 0;
+}
+
+strong {
+  color:#e68a34; 
+}
+
+a { 
+  text-decoration: none;
+  border-bottom: 1px dashed #e4ba6d;
+  color: #948d8d;
+}
+
+
+/*principal*/
+#principal {
   text-align: center;
-  margin-top: 100px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding-top: 110px;
+  padding-bottom: 110px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
+#principal p {
+  margin: 40px;
+  margin-top: 0;
+  font-weight: bold;
+  font-size: 24px;
+  color:#747679;
+}
+
+#acordes {
+  width: 600px; 
+  height: 50px;
+  border-radius: 25px;
+  background-color: #e4b96b;
+  border: none;
+  padding: 0 25px 0 25px;
+  margin-right: 5px;
+}
+
+#acordes:focus{
+  box-shadow: 0 0 0 0;
+  border: 0 none;
+  outline: 0;
+}
+
+
+
+/*info*/
+#tutorial {
+  background-color: #e3e6e9;
+  padding: 5px;
+}
+
+article {
+  background-color: white;
+  border-radius: 5px;
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0px 0px 5px grey;
+}
+
+article h1 {
+  font-size: 23px;
+}
+
+article h2 {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+article h3 {
+  margin-top: 30px;
+  font-size: 16px;
+}
+
+article p, li {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/*rodapé*/
+footer {
+  padding: 5px;
+  color: white;
+  background-color: #272727;
+  text-align: center;
+  font-size: 13px;
+}
+
+
+
+
+/*Acertar daqui para baixo*/
 #controles {
   margin: 0 auto;
   width: 420px;
@@ -98,37 +215,10 @@ label[for="repetir"] {
   margin-top: 20px;
 }
 
-#area-acordes {
-  margin: 50px auto 0 auto;
-  width: 420px;
-}
-
-#acordes {
-  width: 300px;
-  height: 30px;
-}
-
-#botao-acordes {
-  background-color: rgb(15, 87, 92);
-  border: 0px;
-  color: white;
-  width: 100px;
-  height: 35px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-}
-
 #painel-oculto {
   margin-bottom: 200px;
 }
 
-a {
-  color: white;
-  float: right;
-  margin-right: 50px;
-  margin-top: 20px;
-}
 
 @media (max-width: 800px) {
   a {

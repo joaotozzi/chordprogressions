@@ -16,40 +16,81 @@
 <body onload="iniciar()">
 
     <header>
-        <h1>CHORD PROGRESSION 1.0</h1>
-        <a href="https://github.com/joaotozzi/chordprogressions" target="_blank"><em>Saiba Mais</em></a>
+        <h1><a href="#principal">Chord Progressions</a></h1>
+        <nav>
+            <ul>
+                <li><a href="#tutorial">Como usar?</a></li>
+                <li><a href="https://github.com/joaotozzi/chordprogressions" target="_blank">Github</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div id="area-acordes">
-        <input type="text" id="acordes" placeholder="Digite aqui os acordes, ex: Em7 C D Em7">
-        <input type="button" id="botao-acordes" value="GERAR" onclick="definirAcordes()">
-    </div>
+    <div id="principal">
+        
+        <div class="box">
+            <p>Digite sua progressão de acordes</p>
+        </div>
 
-    <p id="progressao">Digite a progressão</p>
-
-    <div id="painel-oculto">
-        <div id="controles">
-            <div id="controle-repeticao">
-                <input type="checkbox" id="repetir" onchange="atualizaRepeticao()">
-                <label for="repetir">(repetir)</label>
+        <div class="box">
+            <input type="text" id="acordes" placeholder="Exemplo: G D/F# Em C" autofocus>  
+        </div>
+        
+        <div class="box">
+            <!--Alterar daqui para baixo-->
+            <p id="progressao"></p>
+    
+            <div id="painel-oculto">
+                <div id="controles">
+                    <div id="controle-repeticao">
+                        <input type="checkbox" id="repetir" onchange="atualizaRepeticao()">
+                        <label for="repetir">(repetir)</label>
+                    </div>
+        
+        
+                    <input type="button" value="PLAY" onclick="onBotaoPlayClicked()" id="play-pause">
+        
+                    <select id="arpejo" onchange="atualizaArpejo()">
+                        <option value="ABBB">ABBB</option>
+                        <option value="AB">AB</option>
+                        <option value="Simples">Simples</option>
+                        <!-- <option value="ABCD">ABCD</option> -->
+                    </select>
+                </div>
+        
+                <div id="controle-andamento">
+                    <label for="bpm" id="label-bpm"></label>
+                    <input type="range" id="bpm" min="60" max="240" step="5" onchange="atualizaBPM(this.value)">
+                </div>
             </div>
-
-
-            <input type="button" value="PLAY" onclick="onBotaoPlayClicked()" id="play-pause">
-
-            <select id="arpejo" onchange="atualizaArpejo()">
-                <option value="ABBB">ABBB</option>
-                <option value="AB">AB</option>
-                <option value="Simples">Simples</option>
-                <!-- <option value="ABCD">ABCD</option> -->
-            </select>
-        </div>
-
-        <div id="controle-andamento">
-            <label for="bpm" id="label-bpm"></label>
-            <input type="range" id="bpm" min="60" max="240" step="5" onchange="atualizaBPM(this.value)">
-        </div>
+        </div> 
     </div>
+    
+    
+    
+
+
+    <div id="tutorial">
+        <article id="como-usar">
+            <h1>Para estudar harmonia, tocar junto e improvisar!</h1>
+            <p>Essa ferramenta web foi desenvolvida para a reprodução de progressões harmônicas (sequências de acordes). Digite a sequência de cifras desejada e ouça os acordes tocados ao som do piano. É possível ainda configurar o padrão do acompanhamento (arpejo) e o andamento em bpm. Com essa ferramenta, fica muito mais fácil estudar harmonia, mesmo quando não estiver com um instrumento por perto. Serve também para aqueles estudantes que precisam de uma base para exercícios ou para treinar seus improvisos.</p>
+
+            <h2>Cifras aceitas</h2>
+            <p>A ferramenta reconhece uma grande quantidade de acordes, com várias possibilidades de cifragem. Desde acordes simples à acordes suspensos e powerchords, inversões de baixo e acréscimo de tensões. Basta <a href="#">digitar</a> as cifras dos acordes desejados, separados por espaço,  para que a sequência de acompanhamento seja reproduzida.</p>
+            
+            <h3>Adicionando tensões</h3>
+            <p>Para adicionar tensões (9ªs, 11ªs e 13ªs) ao acorde, pode-se usar parênteses ou barras. As alterações de intervalos podem ser colocadas antes (<strong>#9</strong> ou <strong>b9</strong>) ou depois (<strong>9+</strong> ou <strong>9-</strong>) do número referente ao intervalo. Veja alguns exemplos:</p>
+            <ul>
+                <li>Com barras: <strong>C7/b9</strong> ou <strong>C7M/9/b13</strong></li>
+                <li>Com parênteses: <strong>C7(9-)</strong>  ou <strong>C7M(9)(b13)</strong></li>
+                <li>Separados por vírgula ou barra dentro de um único parêntese: <strong>C7M(9,b13)</strong> ou <strong>C7M(9/11+)</strong></li>
+            </ul>
+            <p>Para mais informações sobre os padrões de cifragem aceitos, acesse a documentação no <a href="#">github</a>.</p>
+        </article>
+    </div>    
+
+    <footer>
+        <p>2018 Desenvolvido por <a href="https://twitter.com/joaotozzi" target="_blank">João Tozzi</a></p>    
+    </footer>    
 </body>
 
 </html>

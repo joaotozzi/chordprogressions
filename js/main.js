@@ -56,7 +56,7 @@ function iniciar() {
     event.preventDefault();
     //13 "Enter"
     if (event.keyCode === 13) {
-      document.getElementById("botao-acordes").click();
+      definirAcordes();
     }
   });
 }
