@@ -1,7 +1,7 @@
 .navbar-fixa{
   position: fixed;
   width: 100%;
-  z-index: 1;
+  z-index: 4000;
 }
 
 .tela-cheia{
@@ -39,14 +39,13 @@ footer{
 
 #player{
   display: none; /*para iniciar sem aparecer*/
-  position: fixed;
-  bottom: 20px;
-  left: 25%;
-  width: 50%;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 #play-pause, #arpejo, #andamento{
-  font-size: 13px;
+  font-size: 10px;
 }
 
 /*texto responsivo (sm)*/
@@ -76,8 +75,7 @@ footer{
   }
 
   #player{
-      left: 20%;
-      width: 60%;
+      width: 80%;
   }
 }
 
@@ -90,7 +88,6 @@ footer{
 /*(lg)*/
 @media (min-width: 1200px) {
   #player{
-      left: 30%;
-      width: 40%;
+      width: 50%;
   }
 }

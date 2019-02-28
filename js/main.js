@@ -14,7 +14,6 @@ var andamento = document.getElementById("andamento");
 /*evento de clique no botão principal*/
 btn_principal.addEventListener("click", function(){
   tratarInput(input.value);
-  play();
 });
 
 arpejo.addEventListener("change", pausar);
@@ -63,12 +62,11 @@ function tratarInput(textoDigitado){
       exibirCifras(cifras);
       montarAcordes();
       player.style.display = "block";
+      play();
     } else {
       exibirMsgErro(erros);
       player.style.display = "none";
     }
-  }else{
-    mudardeContexto();
   }
 }
 
