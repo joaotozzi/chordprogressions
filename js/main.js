@@ -12,9 +12,7 @@ var arpejo = document.getElementById("arpejo");
 var andamento = document.getElementById("andamento");
 
 /*evento de clique no botão principal*/
-btn_principal.addEventListener("click", function(){
-  tratarInput(input.value);
-});
+btn_principal.addEventListener("click", tratarInput);
 
 arpejo.addEventListener("change", pausar);
 
@@ -31,7 +29,9 @@ play_pause.addEventListener("click", function(){
 titulo.addEventListener("click", mudardeContexto);
 
 
-function tratarInput(textoDigitado){
+function tratarInput(evento){
+  evento.preventDefault();
+  let textoDigitado = input.value;
   if (!(textoDigitado === "")) {
     pausar();
     acordesIntervalos = [];
