@@ -1,100 +1,114 @@
-let bpm = 120;
-let arpejo = "ABBB";
-let repetir = false;
+var bpm = 120;
+var arpejo = "ABBB";
 
-//definindo os acorde da progressão
-function definirAcordes() {
-  textoProgressao = document.getElementById("acordes").value;
-  if (!(textoProgressao === "")) {
+var btn_principal = document.getElementById("btn-principal");
+var player = document.getElementById("player");
+var input = document.getElementById("input-principal");
+var painel_cifras = document.getElementById("painel-cifras");
+var titulo = document.getElementById("titulo"); 
+
+var play_pause = document.getElementById("play-pause");
+var arpejo = document.getElementById("arpejo");
+var andamento = document.getElementById("andamento");
+
+/*evento de clique no botão principal*/
+btn_principal.addEventListener("click", function(){
+  tratarInput(input.value);
+  play();
+});
+
+arpejo.addEventListener("change", pausar);
+
+andamento.addEventListener("change", pausar);
+
+play_pause.addEventListener("click", function(){
+  if(play_pause.value === "PLAY"){
+    play();
+  }else{
+    pausar();
+  }
+});
+
+titulo.addEventListener("click", mudardeContexto);
+
+
+function tratarInput(textoDigitado){
+  if (!(textoDigitado === "")) {
     pausar();
     acordesIntervalos = [];
     progressao = [];
 
     //removendo espaços duplicados da string de entrada
-    textoProgressao = textoProgressao.replace(/\s{2,}/g, " ");
+    textoDigitado = textoDigitado.replace(/\s{2,}/g, " ");
 
     //removendo espaços desnecessários na string de entrada 
-    textoProgressao = textoProgressao.trim();
+    textoDigitado = textoDigitado.trim();
 
-    vetorDeAcordes = textoProgressao.split(" ");
+    let cifras = textoDigitado.split(" ");
     let status = true;
     let erros = [];
 
-    vetorDeAcordes.forEach(function(c) {
-      temp = reconheceAcorde(c);
+    cifras.forEach(function(cifra) {
+      let resultado = reconheceAcorde(cifra);
 
-      if (temp === "erro") {
+      if (resultado === "erro") {
         status = false;
-        erros.push(c);
+        erros.push(cifra);
       } else {
-        acordesIntervalos.push(temp);
+        acordesIntervalos.push(resultado);
       }
     });
 
     if (status) {
-      //Exibe a progressão
-      document.getElementById("progressao").innerHTML =
-        "||: " + textoProgressao.split(" ").join(" | ") + " :||";
+      exibirCifras(cifras);
       montarAcordes();
-      mudarEstado("painel-oculto", false);
+      player.style.display = "block";
     } else {
-      document.getElementById("progressao").innerHTML =
-        "O sistema não reconhece o(s) acorde(s): " + erros.join(" ");
-      mudarEstado("painel-oculto", true);
+      exibirMsgErro(erros);
+      player.style.display = "none";
     }
+  }else{
+    mudardeContexto();
   }
 }
 
-//chamada durante o carregamento da página HTML
-function iniciar() {
-  document.getElementById("label-bpm").innerHTML = "BPM: " + bpm;
-  document.getElementById("bpm").setAttribute("value", bpm);
-  mudarEstado("painel-oculto", true);
+function exibirCifras(cifras){
+  painel_cifras.innerHTML = "";
+ 
+  for(i = 0; i < cifras.length; i++){
+      if (i === 0){
+          painel_cifras.innerHTML += '<div class="col-3 border-right border-left p-0"><p class="cifra">' + cifras[i] + '</p></div>'; 
+      }
+      else if(i%4 == 0){
+          painel_cifras.innerHTML += '<div class="w-100 my-1"></div>';
+          painel_cifras.innerHTML += '<div class="col-3 border-right border-left p-0"><p class="cifra">' + cifras[i] + '</p></div>';
+      }else{
+          painel_cifras.innerHTML += '<div class="col-3 border-right p-0"><p class="cifra">' + cifras[i] + '</p></div>';
+      }
+  }
+} 
 
-  //Evento para Enter no input #acordes
-  document.getElementById("acordes").addEventListener("keyup", function(event) {
-    event.preventDefault();
-    //13 "Enter"
-    if (event.keyCode === 13) {
-      definirAcordes();
-    }
-  });
+function exibirMsgErro(erros){
+  if(erros.length === 1){
+    painel_cifras.innerHTML = '<p class="col-12 display-4 text-center text-danger">O sistema não reconhece o acorde: ' + erros.join(" ") + '</p>';
+  }else{
+    painel_cifras.innerHTML = '<p class="col-12 display-4 text-center text-danger">O sistema não reconhece os acordes: ' + erros.join(" ") + '</p>';
+  }
 }
 
-function onBotaoPlayClicked() {
-  if (botaoPlay === "PLAY") {
-    tocarProgressao(progressao, bpm, arpejo, repetir);
+function play() {
+  if (play_pause.value === "PLAY") {
+    tocarProgressao(progressao, andamento.value, arpejo.options[arpejo.selectedIndex].value, true);
   } else {
     pausar();
   }
 }
 
-function atualizaBPM(andamento) {
-  bpm = andamento;
-  document.getElementById("label-bpm").innerHTML = "BPM: " + bpm;
+function mudardeContexto(){
   pausar();
-}
-
-function atualizaRepeticao() {
-  if (document.getElementById("repetir").checked) {
-    repetir = true;
-  } else {
-    repetir = false;
-  }
-  pausar();
-}
-
-function atualizaArpejo() {
-  selecaoArpejo = document.getElementById("arpejo");
-  arpejo = selecaoArpejo.options[selecaoArpejo.selectedIndex].value;
-  pausar();
-}
-
-function mudarEstado(id, ocultar) {
-  var display = document.getElementById(id).style.display;
-  if (!ocultar) {
-    document.getElementById(id).style.display = "block";
-  } else {
-    document.getElementById(id).style.display = "none";
-  }
+  acordesIntervalos = [];
+  progressao = [];
+  painel_cifras.innerHTML = "";  
+  player.style.display = "none";
+  input.value = "";
 }

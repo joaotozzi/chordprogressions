@@ -1,96 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 
-<head>
-    <script src="js/ohm.js"></script>
-    <script type="text/ohm-js" src="js/gramatica.ohm"></script>
-    <script src="js/parser.js"></script>
-    <script src="js/howler.core.js"></script>
-    <script src=js/harmonia.js></script>
-    <script src="js/reprodutor.js"></script>
-    <script src="js/main.js"></script>
-    <link rel="stylesheet" href="css/estilo.css">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-</head>
+    <head>   
+        <!--metadados-->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body onload="iniciar()">
+        <!--CSS-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/estilo.css">
 
-    <header>
-        <h1><a href="#principal">Chord Progressions</a></h1>
-        <nav>
-            <ul>
-                <li><a href="#tutorial">Como usar?</a></li>
-                <li><a href="https://github.com/joaotozzi/chordprogressions" target="_blank">Github</a></li>
-            </ul>
-        </nav>
-    </header>
+        <title>Chord Progressions</title>
+    </head>
 
-    <div id="principal">
-        
-        <div class="box">
-            <p>Digite sua progressão de acordes</p>
-        </div>
-
-        <div class="box">
-            <input type="text" id="acordes" placeholder="Exemplo: G D/F# Em C" autofocus>  
-        </div>
-        
-        <div class="box">
-            <!--Alterar daqui para baixo-->
-            <p id="progressao"></p>
+    <body>
+        <!--Menu-->
+        <nav class="navbar-fixa navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" id="titulo" href="#">Chord Progressions</a>
+                
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+                </button>
     
-            <div id="painel-oculto">
-                <div id="controles">
-                    <div id="controle-repeticao">
-                        <input type="checkbox" id="repetir" onchange="atualizaRepeticao()">
-                        <label for="repetir">(repetir)</label>
-                    </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="#tutorial">Como usar?</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://github.com/joaotozzi/chordprogressions" target="_blank">Github</a></li>   
+                </ul>
+                </div>
+            </div>
+        </nav>
         
-        
-                    <input type="button" value="PLAY" onclick="onBotaoPlayClicked()" id="play-pause">
-        
-                    <select id="arpejo" onchange="atualizaArpejo()">
+        <div class="tela-cheia container d-flex justify-content-center flex-column">
+            <!--Input de digitação--> 
+            <h1 class="display-4 pb-3">Digite uma sequência de acordes:</h1>
+            <form class="input-group">
+                <input id="input-principal" class="form-control bg-light form-control-lg" type="text" placeholder="Exemplo: C G Am F" autofocus>
+                <span class="input-group-btn">
+                    <button id="btn-principal" class="btn btn-primary btn-lg rounded-right">Gerar</button>
+                </span>
+            </form>
+                
+            <!--Acordes (elementos filhos serão gerados em tempo de execução)-->
+            <div class="row text-center mt-5 mx-2" id="painel-cifras"></div>
+        </div>
+
+        <!--Tutorial-->
+        <div class="jumbotron jumbotron-fluid m-0 py-4 px-3" id="tutorial">
+            <div class="container rounded-lg shadow-sm bg-white">
+                <article class="py-3">
+                <h2 class="display-4 text-primary">Para estudar harmonia, tocar junto e improvisar!</h2>
+                <p class="lead"> Essa ferramenta web foi desenvolvida para a reprodução de sequências de acordes. Digite a sequência de cifras desejada e ouça os acordes tocados ao som do piano. É possível ainda configurar o padrão do acompanhamento (arpejo) e o andamento em bpm. Com essa ferramenta, fica muito mais fácil estudar harmonia, mesmo quando não estiver com um instrumento por perto. Serve também para aqueles estudantes que precisam de uma base para exercícios ou para treinar seus improvisos.</p>
+
+                <h2 class="display-4 text-primary">Cifras aceitas</h2>
+                <p class="lead">A ferramenta reconhece uma grande quantidade de acordes, com várias possibilidades de cifragem. Desde acordes simples à acordes suspensos e powerchords, inversões de baixo e acréscimo de tensões. Basta digitar as cifras dos acordes desejados, separados por espaço,  para que a sequência de acompanhamento seja reproduzida.</p>
+                
+                <h2 class="display-4 text-primary">Adicionando tensões</h2>
+                <p class="lead">Para adicionar tensões (9ªs, 11ªs e 13ªs) ao acorde, pode-se usar parênteses ou barras. As alterações de intervalos podem ser colocadas antes (<strong>#9</strong> ou <strong>b9</strong>) ou depois (<strong>9+</strong> ou <strong>9-</strong>) do número referente ao intervalo. Veja alguns exemplos:</p>
+                <ul class="lead">
+                    <li>Com barras: <strong>C7/b9</strong> ou <strong>C7M/9/b13</strong></li>
+                    <li>Com parênteses: <strong>C7(9-)</strong>  ou <strong>C7M(9)(b13)</strong></li>
+                    <li>Separados por vírgula ou barra dentro de um único parêntese: <strong>C7M(9,b13)</strong> ou <strong>C7M(9/11+)</strong></li>
+                </ul>
+                <p class="lead">Para mais informações sobre os padrões de cifragem aceitos, acesse a documentação no <a href="https://github.com/joaotozzi/chordprogressions" target="_blank">github</a>.</p>
+                </article>
+            </div>
+        </div>
+
+        <!--Rodapé-->
+        <footer class="bg-dark m-0 p-3">
+        <p class="m-0 text-center text-white-50">2018 - Desenvolvido por <a href="https://twitter.com/joaotozzi" target="_blank">João Tozzi</a></p>
+        </footer>
+
+        <!--Player-->
+        <div id="player" class="bg-light border rounded-lg shadow p-2">
+            <div class="row">
+                <div class="col-md-4 mb-2 mb-md-0"><input type="button" value="PLAY" id="play-pause" class="btn btn-primary btn-block"></div>
+                
+                <div class="col-md-4 mb-2 mb-md-0">
+                    <select id="arpejo" class="form-control text-primary"> 
                         <option value="ABBB">ABBB</option>
                         <option value="AB">AB</option>
                         <option value="Simples">Simples</option>
-                        <!-- <option value="ABCD">ABCD</option> -->
                     </select>
                 </div>
         
-                <div id="controle-andamento">
-                    <label for="bpm" id="label-bpm"></label>
-                    <input type="range" id="bpm" min="60" max="240" step="5" onchange="atualizaBPM(this.value)">
+                <div class="col-md-4"> 
+                    <input type="number" placeholder="BPM" class="form-control text-primary text-center" id="andamento" value="120" min="60" max="240">           
                 </div>
             </div>
-        </div> 
-    </div>
-    
-    
-    
+        </div>
 
+        <!--scripts e bibliotecas-->
+        <script src="js/ohm.js"></script>
+        <script type="text/ohm-js" src="js/gramatica.ohm"></script>
+        <script src="js/parser.js"></script>
+        <script src="js/howler.core.js"></script>
+        <script src=js/harmonia.js></script>
+        <script src="js/reprodutor.js"></script>
+        <script src="js/main.js"></script>  
 
-    <div id="tutorial">
-        <article id="como-usar">
-            <h1>Para estudar harmonia, tocar junto e improvisar!</h1>
-            <p>Essa ferramenta web foi desenvolvida para a reprodução de progressões harmônicas (sequências de acordes). Digite a sequência de cifras desejada e ouça os acordes tocados ao som do piano. É possível ainda configurar o padrão do acompanhamento (arpejo) e o andamento em bpm. Com essa ferramenta, fica muito mais fácil estudar harmonia, mesmo quando não estiver com um instrumento por perto. Serve também para aqueles estudantes que precisam de uma base para exercícios ou para treinar seus improvisos.</p>
-
-            <h2>Cifras aceitas</h2>
-            <p>A ferramenta reconhece uma grande quantidade de acordes, com várias possibilidades de cifragem. Desde acordes simples à acordes suspensos e powerchords, inversões de baixo e acréscimo de tensões. Basta <a href="#">digitar</a> as cifras dos acordes desejados, separados por espaço,  para que a sequência de acompanhamento seja reproduzida.</p>
-            
-            <h3>Adicionando tensões</h3>
-            <p>Para adicionar tensões (9ªs, 11ªs e 13ªs) ao acorde, pode-se usar parênteses ou barras. As alterações de intervalos podem ser colocadas antes (<strong>#9</strong> ou <strong>b9</strong>) ou depois (<strong>9+</strong> ou <strong>9-</strong>) do número referente ao intervalo. Veja alguns exemplos:</p>
-            <ul>
-                <li>Com barras: <strong>C7/b9</strong> ou <strong>C7M/9/b13</strong></li>
-                <li>Com parênteses: <strong>C7(9-)</strong>  ou <strong>C7M(9)(b13)</strong></li>
-                <li>Separados por vírgula ou barra dentro de um único parêntese: <strong>C7M(9,b13)</strong> ou <strong>C7M(9/11+)</strong></li>
-            </ul>
-            <p>Para mais informações sobre os padrões de cifragem aceitos, acesse a documentação no <a href="#">github</a>.</p>
-        </article>
-    </div>    
-
-    <footer>
-        <p>2018 Desenvolvido por <a href="https://twitter.com/joaotozzi" target="_blank">João Tozzi</a></p>    
-    </footer>    
-</body>
+        <!--Bootstrap JavaScript: jQuery first, then Popper.js, then Bootstrap JS-->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </body>
 
 </html>

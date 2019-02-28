@@ -1,292 +1,96 @@
-/*Para tirar o bug do vh no Chrome*/
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif;
-  margin: 0;
-}
-
-/*cabeçalho*/
-header {
-  color: white;
-  background-color: #272727;
-  box-shadow: 2px 0px 5px grey;
-  width: 100%;
+.navbar-fixa{
   position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
-header h1 {
-  display: inline-block;
-  font-size: 26px;
-  margin: 10px;
-  margin-left: 20px;
+.tela-cheia{
+height: 100vh;
 }
 
-nav {
-  margin: 0;
-  display: inline;
-  float: right;
+#input-principal{
+  border-radius: 5px 0 0 5px;
+  font-size: 12px;
 }
 
-nav ul {
-  list-style: none;
-  text-align: right;
+#btn-principal{
+  border-radius: 0 5px 5px 0;
+  font-size: 12px;
 }
 
-nav ul li {
-  display: inline;
-  margin-right: 60px;
-  color:#e1e3e6;
-  font-size: 14px;
-  line-height: 1.5;
+.cifra{
+  font-family: 'Quicksand', sans-serif;
+  margin: 10px 0 10px 0;
+  font-size: 13px;
+  font-weight: 400;
 }
 
-header a{
-  color: white;
-  margin-top: 0;
-  text-decoration: none;
-  border-bottom: 0;
+footer{
+  font-size: 12px;
 }
 
-strong {
-  color:#e68a34; 
-}
-
-a { 
-  text-decoration: none;
-  border-bottom: 1px dashed #e4ba6d;
-  color: #948d8d;
-}
-
-
-/*principal*/
-#principal {
-  text-align: center;
-  padding-top: 110px;
-  padding-bottom: 110px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-#principal p {
-  margin: 40px;
-  margin-top: 0;
-  font-weight: bold;
-  font-size: 24px;
-  color:#747679;
-}
-
-#acordes {
-  width: 600px; 
-  height: 50px;
-  border-radius: 25px;
-  background-color: #e4b96b;
-  border: none;
-  padding: 0 25px 0 25px;
-  margin-right: 5px;
-}
-
-#acordes:focus{
-  box-shadow: 0 0 0 0;
-  border: 0 none;
-  outline: 0;
-}
-
-
-
-/*info*/
-#tutorial {
-  background-color: #e3e6e9;
-  padding: 5px;
-}
-
-article {
-  background-color: white;
-  border-radius: 5px;
-  width: 80%;
-  margin: auto;
-  padding: 20px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  box-shadow: 0px 0px 5px grey;
-}
-
-article h1 {
-  font-size: 23px;
-}
-
-article h2 {
-  margin-top: 30px;
+.display-4{
   font-size: 18px;
 }
 
-article h3 {
-  margin-top: 30px;
-  font-size: 16px;
-}
-
-article p, li {
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/*rodapé*/
-footer {
-  padding: 5px;
-  color: white;
-  background-color: #272727;
-  text-align: center;
+.lead{
   font-size: 13px;
 }
 
-
-
-
-/*Acertar daqui para baixo*/
-#controles {
-  margin: 0 auto;
-  width: 420px;
+#player{
+  display: none; /*para iniciar sem aparecer*/
+  position: fixed;
+  bottom: 20px;
+  left: 25%;
+  width: 50%;
 }
 
-#controles label {
-  color: white;
+#play-pause, #arpejo, #andamento{
+  font-size: 13px;
 }
 
-#play-pause {
-  border: 0px;
-  color: white;
-  width: 100px;
-  height: 50px;
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-#play-pause[value="PLAY"] {
-  background-color: rgb(19, 100, 30);
-}
-
-#play-pause[value="PAUSE"] {
-  background-color: rgb(116, 21, 21);
-}
-
-#arpejo {
-  border: 0px;
-  background-color: rgb(15, 87, 92);
-  color: white;
-  width: 195px;
-  height: 50px;
-  text-align: center;
-  padding: 10px;
-  font-size: 16px;
-  margin-left: 10px;
-}
-
-label[for="repetir"] {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-#controle-repeticao {
-  background-color: rgb(15, 87, 92);
-  border-radius: 25px;
-  padding: 10px;
-  display: inline;
-  margin-right: 10px;
-}
-
-#controle-andamento {
-  margin: 50px auto 0 auto;
-  width: 170px;
-}
-
-#label-bpm {
-  color: rgb(15, 87, 92);
-  font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
-}
-
-#bpm {
-  margin-top: 20px;
-}
-
-#painel-oculto {
-  margin-bottom: 200px;
-}
-
-
-@media (max-width: 800px) {
-  a {
-    margin-top: 20px;
-    float: none;
-    font-size: 15px;
+/*texto responsivo (sm)*/
+@media (min-width: 576px) {
+  #input-principal{
+      font-size: 18px;
+  }
+  
+  #btn-principal{
+      font-size: 18px;
   }
 
-  h1 {
-    float: none;
-    font-size: 28px;
-    margin-left: 0;
+  .cifra{
+      font-size: 22px;
+  }
+  
+  footer{
+      font-size: 14px;
   }
 
-  header {
-    height: 80px;
+  .display-4{
+      font-size: 25px;
+  }
+  
+  .lead{
+      font-size: 18px;
   }
 
-  #area-acordes {
-    width: 90%;
-  }
-
-  #acordes {
-    width: 100%;
-  }
-
-  #botao-acordes {
-    width: 100%;
-    margin-top: 30px;
-    height: 50px;
-  }
-
-  #controles {
-    width: 90%;
-  }
-
-  #play-pause {
-    margin-top: 20px;
-    width: 100%;
-  }
-
-  #controle-repeticao {
-    display: block;
-    width: 90px;
-    margin: auto;
-    padding-left: 20px;
-  }
-
-  #arpejo {
-    width: 100%;
-    margin-top: 20px;
-    margin-left: 0;
-  }
-
-  #controle-andamento {
-    margin: auto;
-    margin-top: 50px;
-    width: 150px;
-  }
-
-  p {
-    margin-top: 30px;
-    font-size: 33px;
+  #player{
+      left: 20%;
+      width: 60%;
   }
 }
 
-@media (max-width: 400px) {
-  h1 {
-    font-size: 25px;
+@media (min-width: 600px) {
+  #play-pause, #arpejo, #andamento{
+      font-size: 16px;
+  }
+}
+
+/*(lg)*/
+@media (min-width: 1200px) {
+  #player{
+      left: 30%;
+      width: 40%;
   }
 }

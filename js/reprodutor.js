@@ -3,7 +3,6 @@ let timersRepeticao = [];
 let sounds = [];
 let howls = [];
 let contador = 0;
-let botaoPlay = "PLAY";
 
 //carregando os sons no sistema
 for (var z = 48; z <= 95; z++) {
@@ -164,5 +163,4 @@ function fimReproducao(fim) {
 //atualiza o texto do botão PLAY-PAUSE
 function atualizaTextoBotaoPlay(status) {
   document.getElementById("play-pause").setAttribute("value", status);
-  botaoPlay = status;
 }
