@@ -9,12 +9,10 @@ height: 100vh;
 }
 
 #input-principal{
-  border-radius: 5px 0 0 5px;
   font-size: 12px;
 }
 
 #btn-principal{
-  border-radius: 0 5px 5px 0;
   font-size: 12px;
 }
 
