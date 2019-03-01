@@ -40,44 +40,126 @@ function tocarProgressao(progressao, bpm, arpejo, repetir) {
 //arpeja as notas do acorde a quantidade de vezes indicada
 function arpejador(acorde, pulso, arpejo) {
   switch (arpejo) {
-    case "ABCD":
-      //CORRIGIR: Implementar dedilhado ABDC para qualquer acorde 
-      break;
+    //Semínimas 
+    case "#1":
+      tocarTodasAsNotas(acorde, contador);
 
-    case "AB":
+      tocarTodasAsNotas(acorde, (contador += pulso));
+
+      tocarTodasAsNotas(acorde, (contador += pulso));
+
+      tocarTodasAsNotas(acorde, (contador += pulso));
+
+      contador += pulso; //para iniciar próximo arpejo
+    break;
+
+    //Mínimas  
+    case "#2":
+      tocarTodasAsNotas(acorde, contador);
+
+      tocarTodasAsNotas(acorde, (contador += pulso*2));
+
+      contador += pulso *2; //para iniciar próximo arpejo
+    break;
+
+    //Semibreves 
+    case "#3":
+      tocarTodasAsNotas(acorde, contador);
+
+      contador += pulso *4; //para iniciar próximo arpejo
+    break;
+    
+    //Pop
+    case "#4":
+      tocarTodasAsNotas(acorde, contador);
+
+      tocarTodasAsNotas(acorde, (contador += pulso*2.5));
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.75));
+
+      contador += pulso*0.75; //para iniciar próximo arpejo
+    break;
+
+    //Samba
+    case "#5":
+      tocarTodasAsNotas(acorde, contador);
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.5));
+
+      tocarNota(acorde.baixo, (contador += pulso*0.5));
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.25));
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.5));
+
+      tocarNota(acorde.baixo, (contador += pulso*0.25));
+
+      tocarTodasAsNotas(acorde, (contador += pulso * 0.75));
+
+      tocarNota(acorde.baixo, (contador += pulso*0.25));
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.25));
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.25));
+
+      contador += pulso*0.5; //para iniciar próximo arpejo
+    break;
+
+    //Baião (4/4)
+    case "#6":
       tocarNota(acorde.baixo, contador);
-      tocarNota(acorde.baixo + 12, contador); //oitava acima
+
+      tocarNota(acorde.baixo, (contador += pulso*0.75));
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.75));
+
+      tocarNota(acorde.baixo, (contador += pulso*0.5));
+
+      tocarNota(acorde.baixo, (contador += pulso*0.75));
+
+      tocarTodasAsNotas(acorde, (contador += pulso*0.75));
+
+      contador += pulso*0.5; //para iniciar próximo arpejo
+    break;
+    
+    //ABBB
+    case "#7":
+      tocarNota(acorde.baixo, contador);
+
+      tocarTodasAsNotas(acorde, (contador += pulso));
+
+      tocarTodasAsNotas(acorde, (contador += pulso));
+
+      tocarTodasAsNotas(acorde, (contador += pulso));
+
+      contador += pulso; //para iniciar próximo arpejo
+    break;
+    
+    //AB  
+    case "#8":
+      tocarNota(acorde.baixo, contador);
 
       tocarTodasAsNotas(acorde, (contador += pulso));
 
       tocarNota(acorde.baixo, (contador += pulso));
-      tocarNota(acorde.baixo + 12, contador); //oitava acima
 
       tocarTodasAsNotas(acorde, (contador += pulso));
 
       contador += pulso; //para iniciar próximo arpejo
-      break;
+    break;
 
-    case "ABBB":
-      tocarNota(acorde.baixo, contador);
-      tocarNota(acorde.baixo + 12, contador); //oitava acima
+    //BA  
+    case "#9":
+      tocarTodasAsNotas(acorde, (contador));
 
-      tocarTodasAsNotas(acorde, (contador += pulso));
-
-      tocarTodasAsNotas(acorde, (contador += pulso));
+      tocarNota(acorde.baixo, (contador += pulso));
 
       tocarTodasAsNotas(acorde, (contador += pulso));
+
+      tocarNota(acorde.baixo, (contador += pulso));
 
       contador += pulso; //para iniciar próximo arpejo
-      break;
-
-    case "Simples":
-      for (j = 0; j < 2; j++) {
-        tocarNota(acorde.baixo, contador);
-        tocarTodasAsNotas(acorde, contador);
-        contador += pulso * 2; //para iniciar próximo arpejo
-      }
-      break;
+    break;
   }
 }
 
