@@ -164,7 +164,11 @@ function arpejador(acorde, pulso, arpejo) {
 }
 
 //toca todas as notas as notas do acorde (exceto o baixo)
-function tocarTodasAsNotas(acorde, contador) {
+function tocarTodasAsNotas(acorde, contador) { 
+  if(acorde.fundamental != acorde.baixo){
+    tocarNota(acorde.baixo, contador);
+  }
+
   tocarNota(acorde.fundamental, contador);
 
   if (!(acorde.segunda === "")) {
