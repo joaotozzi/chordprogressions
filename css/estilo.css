@@ -46,6 +46,12 @@ footer{
   font-size: 10px;
 }
 
+#form-centralizado{
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /*texto responsivo (sm)*/
 @media (min-width: 576px) {
   #input-principal{
